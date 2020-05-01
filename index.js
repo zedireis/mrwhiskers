@@ -19,6 +19,7 @@ function dataAtualFormatada(data){
 var interval = client.setInterval (function () {
         var data;
 		if(!data){
+			console.log("First Time");
 			data=new Date();
 		}
 		var sdata = dataAtualFormatada(data);
