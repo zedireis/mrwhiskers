@@ -59,7 +59,7 @@ var interval = client.setInterval (function () {
 			})
 			.catch(console.error);
 		}
-      }, 3600*1000);
+      }, 35*1000);
 
 var tempChannels = [];
 var ntempChannels = [];
