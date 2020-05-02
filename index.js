@@ -60,7 +60,7 @@ var interval = client.setInterval (function () {
 		}
       }, 3600*1000);
 
-var interval_2 = client.setInterval(cleaner, 600*1000);
+var interval_2 = client.setInterval(cleaner, 60*1000);
 
 function cleaner() {
 	console.log("Cleaning");
