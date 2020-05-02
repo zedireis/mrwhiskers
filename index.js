@@ -18,30 +18,24 @@ function dataAtualFormatada(data){
 }
 
 var interval = client.setInterval (function () {
-        var data;
-		if(!data){
-			console.log("First Time");
-			data=new Date();
-		}
+        var data = new Date();
+		// if(!data){
+		// 	console.log("First Time");
+		// 	data=new Date();
+		// }
 		var sdata = dataAtualFormatada(data);
 
-		var channel = client.channels.cache.find(channel => channel.name === sdata);
-		console.log("Antigo"+sdata);
-		if(channel){
-			var d = new Date();
-			var string = dataAtualFormatada(d);
-			console.log("Refreshed Todays Channel "+string);
-			client.todaysChannel = channel;
-			if(string != sdata){
+		//var channel = client.channels.cache.find(channel => channel.name === sdata);
+		if(client.hasOwnProperty('todaysChannel')){
+			console.log("Antigo "+client.todaysChannel.name);
+			console.log("Refreshed Todays Channel "+sdata);
+			if(sdata != client.todaysChannel.name){
 				console.log("Destroy and create ");
-				channel.delete();
-				console.log("Deleted "+sdata);
+				client.todaysChannel.delete();
 
-				data = d;
-				sdata = string;
-				console.log(sdata);
 				client.guilds.cache.first().channels.create(sdata,{type:"text"}).then(channel => {
-					console.log("Created "+sdata);
+					console.log("Created "+string);
+					client.todaysChannel = channel;
 					updateWeather(channel);
 				})
 			}
@@ -86,7 +80,7 @@ function updateWeather(channel){
   			str = "Hoje o tempo em " + nameValue + "\nTemperatura mínima: " + String(min) + "ºC\nTemperatura máxima: " + String(max) + "ºC\n" + descValue;
 			channel.send(str);
 			sleep(5000).then(() => {
-				console.log(str);
+				console.log("Weather Updated");
 			})
 		})
 	.catch(err => console.log("Erro na cidade!"))
