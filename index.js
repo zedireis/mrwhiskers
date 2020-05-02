@@ -43,7 +43,7 @@ var interval = client.setInterval (function () {
 					client.todaysChannel = channel;
 					updateWeather(channel);
 				})
-				.catch(err => console.log("Erro a criar canal"));
+				.catch(console.error);
 			}
 		}else{
 			console.log(sdata);
@@ -55,7 +55,7 @@ var interval = client.setInterval (function () {
 			})
 			.catch(console.error);
 		}
-      }, 35*1000);
+      }, 3600*1000);
 
 var tempChannels = [];
 var ntempChannels = [];
