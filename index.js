@@ -62,17 +62,18 @@ var interval = client.setInterval (function () {
 
 var interval_2 = client.setInterval(cleaner, 600*1000);
 
-async function cleaner() {
+function cleaner() {
 	console.log("Cleaning");
 	client.guilds.cache.first().channels.forEach(channel => {
 		console.log(channel.type());
 		if(channel.type() === "category"){
 			channel.children.forEach(ch => {
 				if(ch.type() === "text"){
-					var fetched = await ch.fetchMessages();
-					ch.bulkDelete(fetched)
-					.then("Tided up!")
-					.catch(console.error);
+					ch.fetchMessages().then( fetched => {
+						ch.bulkDelete(fetched)
+						.then("Tided up!")
+						.catch(console.error);
+					})
 				}
 			})
 		}
