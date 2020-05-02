@@ -65,10 +65,10 @@ var interval_2 = client.setInterval(cleaner, 60*1000);
 function cleaner() {
 	console.log("Cleaning");
 	client.guilds.cache.first().channels.cache.forEach(channel => {
-		console.log(channel.type());
-		if(channel.type() === "category"){
+		console.log(channel.type);
+		if(channel.type === "category"){
 			channel.children.forEach(ch => {
-				if(ch.type() === "text"){
+				if(ch.type === "text"){
 					ch.fetchMessages().then( fetched => {
 						ch.bulkDelete(fetched)
 						.then("Tided up!")
