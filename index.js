@@ -67,7 +67,7 @@ function cleaner() {
 	client.guilds.cache.first().channels.cache.forEach(channel => {
 		if(channel.type === "category"){
 			channel.children.forEach(ch => {
-				if(ch.type === "text"){
+				if(ch.type === "text" && ch.messages){
 					ch.messages.fetch().then( fetched => {
 						console.log(ch.name + " Deleting "+fetched.size);
 						var old_date = ch.lastMessage.createdAt;
