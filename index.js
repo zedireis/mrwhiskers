@@ -13,7 +13,8 @@ function dataAtualFormatada(data){
     var dia  = data.getDate().toString().padStart(2, '0'),
         mes  = (data.getMonth()+1).toString().padStart(2, '0'), //+1 pois no getMonth Janeiro começa com zero.
         ano  = data.getFullYear();
-    return dia+"-"+mes+"-"+ano;
+    var minutes = data.getMinutes();
+    return dia+"-"+mes+"-"+ano+"-"+minutes;
 }
 
 var interval = client.setInterval (function () {
@@ -51,7 +52,7 @@ var interval = client.setInterval (function () {
 				updateWeather(channel);
 			})
 		}
-      }, 30*1000);
+      }, 125*1000);
 
 var tempChannels = [];
 var ntempChannels = [];
