@@ -47,7 +47,7 @@ var interval = client.setInterval (function () {
 				updateWeather(channel);
 			})
 		}
-      }, 125*1000);
+      }, 35*1000);
 
 var tempChannels = [];
 var ntempChannels = [];
