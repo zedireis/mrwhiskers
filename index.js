@@ -32,7 +32,7 @@ var interval = client.setInterval (function () {
 			if(sdata != client.todaysChannel.name){
 				console.log("Destroy and create ");
 				console.log(client.todaysChannel.name);
-				var fetchedChannel = client.guilds.cache.first().channels.find(channel => channel.name === client.todaysChannel.name);
+				var fetchedChannel = client.todaysChannel.guild.channels.find(channel => channel.name === client.todaysChannel.name);
 				fetchedChannel.delete();
 				
 
