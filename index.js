@@ -32,23 +32,28 @@ var interval = client.setInterval (function () {
 			if(sdata != client.todaysChannel.name){
 				console.log("Destroy and create ");
 				console.log(client.todaysChannel.name);
-				var fetchedChannel = client.todaysChannel.guild.channels.find(channel => channel.name === client.todaysChannel.name);
-				fetchedChannel.delete();
+				client.todaysChannel.delete('making room for new channels')
+				.then(console.log)
+				.catch(console.error);
 				
 
-				client.guilds.cache.first().channels.create(sdata,{type:"text"}).then(channel => {
+				client.guilds.cache.first().channels.create(sdata,{type:"text"})
+				.then(channel => {
 					console.log("Created "+string);
 					client.todaysChannel = channel;
 					updateWeather(channel);
 				})
+				.catch(err => console.log("Erro a criar canal"));
 			}
 		}else{
 			console.log(sdata);
-			client.guilds.cache.first().channels.create(sdata,{type:"text"}).then(channel => {
+			client.guilds.cache.first().channels.create(sdata,{type:"text"})
+			.then(channel => {
 				//console.log("Created "+sdata);
 				client.todaysChannel = channel;
 				updateWeather(channel);
 			})
+			.catch(console.error);
 		}
       }, 35*1000);
 
