@@ -30,12 +30,16 @@ var interval = client.setInterval (function () {
 			console.log("Antigo "+client.todaysChannel.name);
 			console.log("Refreshed Todays Channel "+sdata);
 			if(sdata != client.todaysChannel.name){
-				console.log("Destroy and create ");
-				console.log(client.todaysChannel.name);
-				client.todaysChannel.delete('making room for new channels')
-				.then(console.log)
+				console.log("A destruir "+client.todaysChannel.name);
+				client.todaysChannel.delete()
+				.then(console.log("Channel Deleted"))
 				.catch(console.error);
-				
+
+
+
+				sleep(10*1000).then(() => {
+					console.log("Vou criar")
+				})
 
 				client.guilds.cache.first().channels.create(sdata,{type:"text"})
 				.then(channel => {
@@ -46,7 +50,7 @@ var interval = client.setInterval (function () {
 				.catch(console.error);
 			}
 		}else{
-			console.log(sdata);
+			console.log("First time " + sdata);
 			client.guilds.cache.first().channels.create(sdata,{type:"text"})
 			.then(channel => {
 				//console.log("Created "+sdata);
