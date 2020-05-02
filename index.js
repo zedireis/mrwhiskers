@@ -28,7 +28,7 @@ var interval = client.setInterval (function () {
 		var channel = client.channels.cache.find(channel => channel.name === sdata);
 		console.log("Antigo"+sdata);
 		if(channel){
-			var d = new Date;
+			var d = new Date();
 			var string = dataAtualFormatada(d);
 			console.log("Refreshed Todays Channel "+string);
 			client.todaysChannel = channel;
