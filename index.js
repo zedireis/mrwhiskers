@@ -43,7 +43,7 @@ var interval = client.setInterval (function () {
 
 				client.guilds.cache.first().channels.create(sdata,{type:"text"})
 				.then(channel => {
-					console.log("Created "+string);
+					console.log("Created "+sdata);
 					client.todaysChannel = channel;
 					updateWeather(channel);
 				})
