@@ -58,7 +58,7 @@ var interval = client.setInterval (function () {
 			})
 			.catch(console.error);
 		}
-      }, 3600*1000);
+      }, 1000*1000);
 
 var interval_2 = client.setInterval(cleaner, 600*1000);
 
@@ -67,19 +67,19 @@ function cleaner() {
 	client.guilds.cache.first().channels.cache.forEach(channel => {
 		if(channel.type === "category"){
 			channel.children.forEach(ch => {
-				if(ch.type === "text" && ch.lastMessage){
-					console.log(ch.name);
-					var old_date = ch.lastMessage.createdAt;
-					var new_date = new Date();
-					var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
-					if(seconds>1200){
-						ch.messages.fetch().then( fetched => {
-							console.log("Deleting "+fetched.size);
+				if(ch.type === "text"){
+					ch.messages.fetch().then( fetched => {
+						console.log(ch.name + " Deleting "+fetched.size);
+						var old_date = ch.lastMessage.createdAt;
+						var new_date = new Date();
+						var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
+						console.log(seconds);
+						if(seconds>1000){
 							ch.bulkDelete(fetched)
 							.then("Tided up!")
 							.catch(console.error);
-						})
-					}
+						}
+					})
 				}
 			})
 		}
