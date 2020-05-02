@@ -60,8 +60,23 @@ var interval = client.setInterval (function () {
 		}
       }, 3600*1000);
 
-var tempChannels = [];
-var ntempChannels = [];
+var interval_2 = client.setInterval(function (){
+	console.log("Cleaning");
+	client.guilds.cache.first().channels.forEach(channel => {
+		console.log(channel.type());
+		if(channel.type() === "category"){
+			channel.children.forEach(ch => {
+				if(ch.type() === "text"){
+					var fetched = await ch.fetchMessages();
+					ch.bulkDelete(fetched)
+					.then("Tided up!")
+					.catch(console.error);
+				}
+			})
+		}
+	})
+}, 600*1000)
+
 
 client.on("message", message =>{
 	
