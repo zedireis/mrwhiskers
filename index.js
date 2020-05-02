@@ -60,7 +60,9 @@ var interval = client.setInterval (function () {
 		}
       }, 3600*1000);
 
-var interval_2 = client.setInterval(function (){
+var interval_2 = client.setInterval(cleaner, 600*1000);
+
+async function cleaner() {
 	console.log("Cleaning");
 	client.guilds.cache.first().channels.forEach(channel => {
 		console.log(channel.type());
@@ -74,9 +76,8 @@ var interval_2 = client.setInterval(function (){
 				}
 			})
 		}
-	})
-}, 600*1000)
-
+	});
+}
 
 client.on("message", message =>{
 	
