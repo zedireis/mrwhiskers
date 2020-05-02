@@ -31,8 +31,10 @@ var interval = client.setInterval (function () {
 			console.log("Refreshed Todays Channel "+sdata);
 			if(sdata != client.todaysChannel.name){
 				console.log("Destroy and create ");
-				client.todaysChannel.delete();
-				console.log("Foi no delete");
+				console.log(client.todaysChannel.name);
+				var fetchedChannel = client.guilds.cache.first().channels.find(channel => channel.name === client.todaysChannel.name);
+				fetchedChannel.delete();
+				
 
 				client.guilds.cache.first().channels.create(sdata,{type:"text"}).then(channel => {
 					console.log("Created "+string);
