@@ -26,6 +26,7 @@ var interval = client.setInterval (function () {
 		var sdata = dataAtualFormatada(data);
 
 		var channel = client.channels.cache.find(channel => channel.name === sdata);
+		console.log("Antigo"+sdata);
 		if(channel){
 			var d = new Date;
 			var string = dataAtualFormatada(d);
@@ -34,13 +35,13 @@ var interval = client.setInterval (function () {
 			if(string != sdata){
 				console.log("Destroy and create ");
 				channel.delete();
-				//console.log("Deleted "+sdata);
+				console.log("Deleted "+sdata);
 
 				data = d;
 				sdata = string;
 				console.log(sdata);
 				client.guilds.cache.first().channels.create(sdata,{type:"text"}).then(channel => {
-					//console.log("Created "+sdata);
+					console.log("Created "+sdata);
 					updateWeather(channel);
 				})
 			}
