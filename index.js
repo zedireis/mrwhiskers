@@ -60,10 +60,10 @@ var interval = client.setInterval (function () {
 		}
       }, 1000*1000);
 
-var interval_2 = client.setInterval(cleaner, 30*1000);
+var interval_2 = client.setInterval(cleaner, 600*1000);
 
 function cleaner() {
-	console.log("Cleaning");
+	//console.log("Cleaning");
 	client.guilds.cache.first().channels.cache.forEach(channel => {
 		if(channel.type === "category"){
 			channel.children.forEach(ch => {
@@ -72,7 +72,7 @@ function cleaner() {
 						var old_date = ch.lastMessage.createdAt;
 						var new_date = new Date();
 						var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
-						console.log(seconds);
+						//console.log(seconds);
 						if(seconds>1000){
 							console.log(ch.name + " Deleting "+fetched.size);
 							ch.bulkDelete(fetched)
