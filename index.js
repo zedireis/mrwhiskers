@@ -31,7 +31,7 @@ var interval = client.setInterval (function () {
 			console.log("Refreshed Todays Channel "+sdata);
 			if(sdata != client.todaysChannel.name){
 				console.log("A destruir "+client.todaysChannel.name);
-				client.todaysChannel.delete()
+				client.todaysChannel.delete("Porque sim")
 				.then(console.log("Channel Deleted"))
 				.catch(console.error);
 
@@ -59,7 +59,7 @@ var interval = client.setInterval (function () {
 			})
 			.catch(console.error);
 		}
-      }, 35*1000);
+      }, 36*1000);
 
 var tempChannels = [];
 var ntempChannels = [];
