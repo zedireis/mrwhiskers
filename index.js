@@ -81,7 +81,7 @@ function cleaner() {
 								.catch(console.error);
 							}
 						}
-					}
+					})
 				}
 			})
 		}
