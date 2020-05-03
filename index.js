@@ -60,7 +60,7 @@ var interval = client.setInterval (function () {
 		}
       }, 1000*1000);
 
-var interval_2 = client.setInterval(cleaner, 600*1000);
+var interval_2 = client.setInterval(cleaner, 10*1000);
 
 function cleaner() {
 	console.log("Cleaning");
@@ -68,16 +68,17 @@ function cleaner() {
 		if(channel.type === "category"){
 			channel.children.forEach(ch => {
 				if(ch.type === "text" && ch.lastMessage){
-						var old_date = ch.lastMessage.createdAt;
-						var new_date = new Date();
-						var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
-						//console.log(seconds);
-						if(seconds>1000){
-								ch.messages.fetch().then( fetched => {
-									console.log(ch.name + " Deleting "+fetched.size);
-									ch.bulkDelete(fetched).then(console.log("Tided up"));
-								})
-						}
+					console.log("Mensagem "+dataAtualFormatada()+"\n"+ch.lastMessage.content);
+					var old_date = ch.lastMessage.createdAt;
+					var new_date = new Date();
+					var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
+					//console.log(seconds);
+					if(seconds>1000){
+							ch.messages.fetch().then( fetched => {
+								console.log(ch.name + " Deleting "+fetched.size);
+								ch.bulkDelete(fetched).then(console.log("Tided up"));
+							})
+					}
 				}
 			})
 		}
