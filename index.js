@@ -69,7 +69,7 @@ function cleaner() {
 			channel.children.forEach(ch => {
 				if(ch.type === "text"){
 					ch.messages.fetch().then( fetched => {
-					console.log("Mensagem "+dataAtualFormatada(ch.lastMessage.createdAt)+"\n"+ch.lastMessage.content);
+					console.log(ch.name + " Mensagem "+dataAtualFormatada(ch.lastMessage.createdAt)+"\n"+ch.lastMessage.content);
 					var old_date = ch.lastMessage.createdAt;
 					var new_date = new Date();
 					var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
