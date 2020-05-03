@@ -40,7 +40,7 @@ var interval = client.setInterval (function () {
 					console.log("Vou criar")
 				})
 
-				client.guilds.cache.first().channels.create(sdata,{type:"text"})
+				client.guilds.cache.first().channels.create(sdata,{type:"text", nsfw:true})
 				.then(channel => {
 					console.log("Created "+sdata);
 					client.todaysChannel = channel;
@@ -50,7 +50,7 @@ var interval = client.setInterval (function () {
 			}
 		}else{
 			console.log("First time " + sdata);
-			client.guilds.cache.first().channels.create(sdata,{type:"text"})
+			client.guilds.cache.first().channels.create(sdata,{type:"text", nsfw:true})
 			.then(channel => {
 				//console.log("Created "+sdata);
 				client.todaysChannel = channel;
@@ -60,7 +60,7 @@ var interval = client.setInterval (function () {
 		}
       }, 1000*1000);
 
-var interval_2 = client.setInterval(cleaner, 10*1000);
+var interval_2 = client.setInterval(cleaner, 120*1000);
 
 function cleaner() {
 	console.log("Cleaning");
@@ -70,12 +70,12 @@ function cleaner() {
 				if(ch.type === "text"){
 					ch.messages.fetch().then( fetched => {
 						if(fetched.size>0){
-							console.log(ch.name+" Mensagem "+fetched.first().createdAt+"\n"+fetched.first().content);
+							//console.log(ch.name+" Mensagem "+fetched.first().createdAt+"\n"+fetched.first().content);
 							var old_date = fetched.first().createdAt;
 							var new_date = new Date();
 							var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
 							//console.log(seconds);
-							if(seconds>60){
+							if(seconds>600){
 								console.log(ch.name + " Deleting "+fetched.size);
 								ch.bulkDelete(fetched).then(console.log("Tided up"))
 								.catch(console.error);
