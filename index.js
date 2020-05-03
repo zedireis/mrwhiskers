@@ -73,12 +73,10 @@ function cleaner() {
 						var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
 						//console.log(seconds);
 						if(seconds>1000){
-							while(ch.messages){
 								ch.messages.fetch().then( fetched => {
 									console.log(ch.name + " Deleting "+fetched.size);
 									ch.bulkDelete(fetched).then(console.log("Tided up"));
 								})
-							}
 						}
 				}
 			})
