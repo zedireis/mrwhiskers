@@ -69,16 +69,19 @@ function cleaner() {
 			channel.children.forEach(ch => {
 				if(ch.type === "text"){
 					ch.messages.fetch().then( fetched => {
-					console.log(ch.name + " Mensagem "+ch.lastMessage.content);
-					var old_date = ch.lastMessage.createdAt;
-					var new_date = new Date();
-					var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
-					//console.log(seconds);
-					if(seconds>60){
-						console.log(ch.name + " Deleting "+fetched.size);
-						ch.bulkDelete(fetched).then(console.log("Tided up"));
+						if(fetched.size>0){
+							console.log("Mensagem "+dataAtualFormatada()+"\n"+fetched.first().createdAt);
+							var old_date = fetched.first().createdAt;
+							var new_date = new Date();
+							var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
+							//console.log(seconds);
+							if(seconds>60){
+								console.log(ch.name + " Deleting "+fetched.size);
+								ch.bulkDelete(fetched).then(console.log("Tided up"))
+								.catch(console.error);
+							}
+						}
 					}
-					}).catch(console.error);
 				}
 			})
 		}
