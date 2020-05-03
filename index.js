@@ -70,7 +70,7 @@ function cleaner() {
 				if(ch.type === "text"){
 					ch.messages.fetch().then( fetched => {
 						if(fetched.size>0){
-							console.log("Mensagem "+dataAtualFormatada()+"\n"+fetched.first().createdAt);
+							console.log(ch.name+" Mensagem "+fetched.first().createdAt+"\n"+fetched.first().content);
 							var old_date = fetched.first().createdAt;
 							var new_date = new Date();
 							var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
