@@ -58,9 +58,9 @@ var interval = client.setInterval (function () {
 			})
 			.catch(console.error);
 		}
-      }, 1000*1000);
+      }, 20*60*1000);
 
-var interval_2 = client.setInterval(cleaner, 120*1000);
+var interval_2 = client.setInterval(cleaner, 600*1000);
 
 function cleaner() {
 	console.log("Cleaning");
@@ -75,7 +75,7 @@ function cleaner() {
 							var new_date = new Date();
 							var seconds = (new_date.getTime() - old_date.getTime()) / 1000;
 							//console.log(seconds);
-							if(seconds>600){
+							if(seconds>120*60){
 								console.log(ch.name + " Deleting "+fetched.size);
 								ch.bulkDelete(fetched).then(console.log("Tided up"))
 								.catch(console.error);
@@ -95,9 +95,9 @@ client.on("message", message =>{
 		nWordCheck(message,client.todaysChannel)
 	}
 
-	if(message.content.startsWith("${prefix}")){
-		console.log(message.content)
-	}
+	// if(message.content.startsWith("${prefix}")){
+	// 	console.log(message.content)
+	// }
 
 })
 
