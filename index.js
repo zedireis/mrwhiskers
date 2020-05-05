@@ -24,7 +24,6 @@ var interval = client.setInterval (function () {
 		// }
 		var sdata = dataAtualFormatada(data);
 
-		//var channel = client.channels.cache.find(channel => channel.name === sdata);
 		if(client.hasOwnProperty('todaysChannel')){
 			console.log("Antigo "+client.todaysChannel.name);
 			console.log("Refreshed Todays Channel "+sdata);
@@ -50,13 +49,19 @@ var interval = client.setInterval (function () {
 			}
 		}else{
 			console.log("First time " + sdata);
-			client.guilds.cache.first().channels.create(sdata,{type:"text", nsfw:true})
-			.then(channel => {
-				//console.log("Created "+sdata);
+			var channel = client.channels.cache.find(channel => channel.name === sdata);
+			if(channel){
 				client.todaysChannel = channel;
-				updateWeather(channel);
-			})
-			.catch(console.error);
+				console.log("Já existia");
+			}else{
+				client.guilds.cache.first().channels.create(sdata,{type:"text", nsfw:true})
+				.then(channel => {
+					//console.log("Created "+sdata);
+					client.todaysChannel = channel;
+					updateWeather(channel);
+				})
+				.catch(console.error);
+			}
 		}
       }, 20*60*1000);
 
