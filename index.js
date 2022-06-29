@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const {prefix} = require("./config.json");
 const token = process.env.token;
+const bad_words = process.env.badwords.split(',');
 const weather = process.env.weather;
 const client = new Discord.Client();
 const fetch = require("node-fetch");
@@ -128,7 +129,6 @@ function updateWeather(channel){
 }
 
 function nWordCheck(message, channel){
-	var bad_words = ["NIGGER", "NIGGA"];
 	for (let i=0; i<bad_words.length; i++){
 		if(message.content.toUpperCase().includes(bad_words[i])){
 			channel.send(message.author.username+" acabou de dizer a NWord! :poo:")
